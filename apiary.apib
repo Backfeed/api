@@ -8,9 +8,9 @@ General purpose API
 
 ## Handle [/handle{?handleType,handleName}]
 
-### Handle- Delete all Handles [DELETE]
+### Delete all Handles [DELETE]
 
-### Handle - Create Handle [POST]
+### Create Handle [POST]
 + Parameters
     + handleType (string, required)
 
@@ -20,14 +20,14 @@ General purpose API
 
 ## Handle 1 [/handle/1]
 
-### Handle- Delete Specific Handle [DELETE]
+### Delete Specific Handle [DELETE]
 
-### Handle- Get Specific Handle [GET]
+### Get Specific Handle [GET]
 
 
 ## Handle [/handle]
 
-### Handle- Get All Handles [GET]
+### Get All Handles [GET]
 
 
 
@@ -35,7 +35,7 @@ General purpose API
 
 ## Contribution [/contribution{?collaborationId,agentId,type,comment}]
 
-### Contribution - Create a Milestone [POST]
+### Create a Milestone [POST]
 + Parameters
     + collaborationId (number, required)
 
@@ -47,12 +47,12 @@ General purpose API
 
 
 + Request (application/json)
-    + Attributes (Contribution - Create a MilestoneRequest)
+    + Attributes (Create a MilestoneRequest)
 
 
 ## Contribution [/contribution{?collaborationId,agentId,type,comment}]
 
-### Contribution - Create Contribution [POST]
+### Create Contribution [POST]
 + Parameters
     + collaborationId (number, required)
 
@@ -64,29 +64,22 @@ General purpose API
 
 
 + Request (application/json)
-    + Attributes (Contribution - Create ContributionRequest)
+    + Attributes (Create ContributionRequest)
 
 
 ## Contribution [/contribution{?collaborationId}]
 
-### Contribution - Get All Contributions [GET]
+### Get All Contributions [GET]
 
-### Contribution - Get Contributions by Collaboration [GET]
+### Get Contributions by Collaboration [GET]
 + Parameters
     + collaborationId (number, required)
 
 
 
-## Contribution 1 [/contribution/1]
-
-### Contribution - Delete Specific Contribution [DELETE]
-
-### Contribution - Get Specific Contribution [GET]
-
-
 ## Contribution [/contribution{?key,contains}]
 
-### Contribution - Get Contributions by Title [GET]
+### Get Contributions by Title [GET]
 + Parameters
     + key (string, required)
 
@@ -94,9 +87,9 @@ General purpose API
 
 
 
-## Contribution [/contribution]
+## Contribution 1 [/contribution/1]
 
-### Contribution - Delete all Contributions [DELETE]
+### Get Specific Contribution [GET]
 
 
 
@@ -104,7 +97,7 @@ General purpose API
 
 ## Network [/network{?description,name,creator,protocol,agents,collaborations}]
 
-### Network - Create Network [POST]
+### Create Network [POST]
 + Parameters
     + description (string, required)
 
@@ -122,16 +115,12 @@ General purpose API
 
 ## Network [/network]
 
-### Network - Get All Networks [GET]
-
-### Network - Delete all Networks [DELETE]
+### Get All Networks [GET]
 
 
 ## Network 1 [/network/1]
 
-### Network - Delete Specific Network [DELETE]
-
-### Network - Get Specific Network [GET]
+### Get Specific Network [GET]
 
 
 
@@ -139,7 +128,7 @@ General purpose API
 
 ## Agent UpdateHandle 1 [/agent/updateHandle/1{?handleType,handleName}]
 
-### Agent - Update Agent Handle [PUT]
+### Update Agent Handle [PUT]
 + Parameters
     + handleType (string, required)
 
@@ -147,44 +136,22 @@ General purpose API
 
 
 
-## Agent 1 [/agent/1{?networkId}]
+## Agent 1 [/agent/1]
 
-### Agent - Delete Agent Network [DELETE]
-+ Parameters
-    + networkId (number, required)
-
-
-
-## Agent 1 [/agent/1{?handleType,handleName}]
-
-### Agent- Get Specific Agent [GET]
-
-### Agent - Delete Specific Agent  [DELETE]
-
-### Agent - Delete Agent Handle [DELETE]
-+ Parameters
-    + handleType (string, required)
-
-    + handleName (string, required)
-
+### Get Specific Agent [GET]
 
 
 ## Agent UpdateNetwork 1 [/agent/updateNetwork/1{?networkId}]
 
-### Agent - Update Agent Network [PUT]
+### Update Agent Network [PUT]
 + Parameters
     + networkId (number, required)
 
 
 
-## Agent [/agent]
-
-### Agent - Delete all Agents [DELETE]
-
-
 ## Agent FindByHandle [/agent/findByHandle{?handleType,handleName}]
 
-### Agent- Get Agent by Handle [GET]
+### Get Agent by Handle [GET]
 + Parameters
     + handleType (string, required)
 
@@ -194,7 +161,7 @@ General purpose API
 
 ## Agent AllByNetwork [/agent/allByNetwork{?networkId}]
 
-### Agent - Get All Agents in Network [GET]
+### Get All Agents in Network [GET]
 + Parameters
     + networkId (number, required)
 
@@ -202,7 +169,7 @@ General purpose API
 
 ## Agent AllInCollaboration [/agent/allInCollaboration{?collaborationId}]
 
-### Agent - Get All Agents in Collaboration [GET]
+### Get All Agents in Collaboration [GET]
 + Parameters
     + collaborationId (number, required)
 
@@ -213,16 +180,12 @@ General purpose API
 
 ## Evaluation 1 [/evaluation/1]
 
-### Evaluation - Get Specific Evaluation [GET]
-
-### Evaluation - Delete Specific Evaluation [DELETE]
+### Get Specific Evaluation [GET]
 
 
 ## Evaluation [/evaluation{?agentId,tokens,contributionId,stake}]
 
-### Evaluation - Delete all Evaluations [DELETE]
-
-### Evaluation - Create Evaluation [POST]
+### Create Evaluation [POST]
 + Parameters
     + agentId (number, required)
 
@@ -236,7 +199,7 @@ General purpose API
 
 ## Evaluation [/evaluation{?contributionId}]
 
-### Evaluation - Get All Evaluations for a Contribution [GET]
+### Get All Evaluations for a Contribution [GET]
 + Parameters
     + contributionId (number, required)
 
@@ -247,7 +210,7 @@ General purpose API
 
 ## Collaboration [/collaboration{?agentId,networkId}]
 
-### Collaboration - Get All Collaborations By Agent in Network [GET]
+### Get All Collaborations By Agent in Network [GET]
 + Parameters
     + agentId (number, required)
 
@@ -255,16 +218,9 @@ General purpose API
 
 
 
-## Collaboration 1 [/collaboration/1]
-
-### Collaboration - Delete Specific Collaboration [DELETE]
-
-### Collaboration - Get Specific Collaboration [GET]
-
-
 ## Collaboration [/collaboration{?name,creator,description,tokenName,tokenSymbol,tokenTotal,protocol,networkId,handles,contributors,comment}]
 
-### Collaboration - Create Collaboration [POST]
+### Create Collaboration [POST]
 + Parameters
     + name (string, required)
 
@@ -292,28 +248,28 @@ General purpose API
 
 ## Collaboration [/collaboration{?networkId}]
 
-### Collaboration - Get All Collaborations for Network [GET]
+### Get All Collaborations for Network [GET]
 + Parameters
     + networkId (number, required)
 
 
 
-## Collaboration [/collaboration{?networkId}]
+## Collaboration 1 [/collaboration/1]
 
-### Collaboration - Get All Collaborations [GET]
+### Get Specific Collaboration [GET]
 
-### Collaboration - Delete All Collaborations for Network [DELETE]
-+ Parameters
-    + networkId (number, required)
 
+## Collaboration [/collaboration]
+
+### Get All Collaborations [GET]
 
 
 
 # Agent [/agent{?name}]
 
-## Agent - Get All Agents [GET]
+## Get All Agents [GET]
 
-## Agent - Create Agent [POST]
+## Create Agent [POST]
 + Parameters
     + name (string, required)
 
@@ -321,7 +277,7 @@ General purpose API
 
 # Contribution [/contribution{?key,contains}]
 
-## Contribution - Get Contributions by Description [GET]
+## Get Contributions By Description query [GET]
 + Parameters
     + key (string, required)
 
@@ -331,7 +287,7 @@ General purpose API
 
 # Agent 1 [/agent/1{?handleType,handleName}]
 
-## Agent - Register a Handle for Agent [POST]
+## Register a Handle for Agent [POST]
 + Parameters
     + handleType (string, required)
 
@@ -353,7 +309,7 @@ General purpose API
 
 # Data Structures
 
-## Contribution - Create a MilestoneRequest (object)
+## Create a MilestoneRequest (object)
 
 
 ### Properties
@@ -370,7 +326,7 @@ General purpose API
 + `milestoneContributions` (array[number], required) 
 
 
-## Contribution - Create ContributionRequest (object)
+## Create ContributionRequest (object)
 
 
 ### Properties
