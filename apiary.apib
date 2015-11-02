@@ -1,81 +1,387 @@
 FORMAT: 1A
-HOST: http://api.backfeed.cc/
+HOST: {{baseURL}}
 
-# Backfeed
+# Backfeed API
+General purpose API
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+# Group Handle
 
-## Agents [/agent]
+## Handle [/handle{?handleType,handleName}]
 
-### Get All Agents [GET]
+### Handle- Delete all Handles [DELETE]
 
-+ Response 200 (application/json)
+### Handle - Create Handle [POST]
++ Parameters
+    + handleType (string, required)
 
-        [
-            {
-                id: "our unique id",
-                name: "JohnLennon",
-                handles: [
-                        {
-                            name: '@MyTwtterName',
-                            type: 'twitter'
-                        },
-                        {
-                            name: 'mrninja',
-                            type: 'github'
-                        }
-                    ],
-                collaborations: [
-                        {
-                            id: '546564',
-                            tokens: 54,
-                            reputation: 234
-                        }
-                    ],
-                networks: [
-                        {
-                            id: 1,
-                            name: 'Slant'
-                        },
-                        {
-                            id: 2,
-                            name: 'OuiShare'
-                        }
-                ]
-            }
-        ];
+    + handleName (string, required)
 
-### Create Agent [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+
+## Handle 1 [/handle/1]
+
+### Handle- Delete Specific Handle [DELETE]
+
+### Handle- Get Specific Handle [GET]
+
+
+## Handle [/handle]
+
+### Handle- Get All Handles [GET]
+
+
+
+# Group Contribution
+
+## Contribution [/contribution{?collaborationId,agentId,type,comment}]
+
+### Contribution - Create a Milestone [POST]
++ Parameters
+    + collaborationId (number, required)
+
+    + agentId (number, required)
+
+    + type (string, required)
+
+    + comment (string, required)
+
 
 + Request (application/json)
-
-        {
-            "name": "MyGoodName"
-        }
-
-+ Response 201 (application/json)
+    + Attributes (Contribution - Create a MilestoneRequest)
 
 
-    + Body
+## Contribution [/contribution{?collaborationId,agentId,type,comment}]
 
-            {
-                "id": "14375107-826d-4f26-a859-350bee9df587"
-            }
+### Contribution - Create Contribution [POST]
++ Parameters
+    + collaborationId (number, required)
 
-## Collaboration [/collaboration]
+    + agentId (number, required)
+
+    + type (string, required)
+
+    + comment (string, required)
+
+
++ Request (application/json)
+    + Attributes (Contribution - Create ContributionRequest)
+
+
+## Contribution [/contribution{?collaborationId}]
+
+### Contribution - Get All Contributions [GET]
+
+### Contribution - Get Contributions by Collaboration [GET]
++ Parameters
+    + collaborationId (number, required)
+
+
+
+## Contribution 1 [/contribution/1]
+
+### Contribution - Delete Specific Contribution [DELETE]
+
+### Contribution - Get Specific Contribution [GET]
+
+
+## Contribution [/contribution{?key,contains}]
+
+### Contribution - Get Contributions by Title [GET]
++ Parameters
+    + key (string, required)
+
+    + contains (string, required)
+
 
 
 ## Contribution [/contribution]
 
+### Contribution - Delete all Contributions [DELETE]
 
-## Evaluatioin [/evaluation]
+
+
+# Group Network
+
+## Network [/network{?description,name,creator,protocol,agents,collaborations}]
+
+### Network - Create Network [POST]
++ Parameters
+    + description (string, required)
+
+    + name (string, required)
+
+    + creator (number, required)
+
+    + protocol (string, required)
+
+    + agents (string, required)
+
+    + collaborations (string, required)
+
 
 
 ## Network [/network]
 
+### Network - Get All Networks [GET]
 
+### Network - Delete all Networks [DELETE]
+
+
+## Network 1 [/network/1]
+
+### Network - Delete Specific Network [DELETE]
+
+### Network - Get Specific Network [GET]
+
+
+
+# Group Agent
+
+## Agent UpdateHandle 1 [/agent/updateHandle/1{?handleType,handleName}]
+
+### Agent - Update Agent Handle [PUT]
++ Parameters
+    + handleType (string, required)
+
+    + handleName (string, required)
+
+
+
+## Agent 1 [/agent/1{?networkId}]
+
+### Agent - Delete Agent Network [DELETE]
++ Parameters
+    + networkId (number, required)
+
+
+
+## Agent 1 [/agent/1{?handleType,handleName}]
+
+### Agent- Get Specific Agent [GET]
+
+### Agent - Delete Specific Agent  [DELETE]
+
+### Agent - Delete Agent Handle [DELETE]
++ Parameters
+    + handleType (string, required)
+
+    + handleName (string, required)
+
+
+
+## Agent UpdateNetwork 1 [/agent/updateNetwork/1{?networkId}]
+
+### Agent - Update Agent Network [PUT]
++ Parameters
+    + networkId (number, required)
+
+
+
+## Agent [/agent]
+
+### Agent - Delete all Agents [DELETE]
+
+
+## Agent FindByHandle [/agent/findByHandle{?handleType,handleName}]
+
+### Agent- Get Agent by Handle [GET]
++ Parameters
+    + handleType (string, required)
+
+    + handleName (string, required)
+
+
+
+## Agent AllByNetwork [/agent/allByNetwork{?networkId}]
+
+### Agent - Get All Agents in Network [GET]
++ Parameters
+    + networkId (number, required)
+
+
+
+## Agent AllInCollaboration [/agent/allInCollaboration{?collaborationId}]
+
+### Agent - Get All Agents in Collaboration [GET]
++ Parameters
+    + collaborationId (number, required)
+
+
+
+
+# Group Evaluation
+
+## Evaluation 1 [/evaluation/1]
+
+### Evaluation - Get Specific Evaluation [GET]
+
+### Evaluation - Delete Specific Evaluation [DELETE]
+
+
+## Evaluation [/evaluation{?agentId,tokens,contributionId,stake}]
+
+### Evaluation - Delete all Evaluations [DELETE]
+
+### Evaluation - Create Evaluation [POST]
++ Parameters
+    + agentId (number, required)
+
+    + tokens (number, required)
+
+    + contributionId (number, required)
+
+    + stake (number, required)
+
+
+
+## Evaluation [/evaluation{?contributionId}]
+
+### Evaluation - Get All Evaluations for a Contribution [GET]
++ Parameters
+    + contributionId (number, required)
+
+
+
+
+# Group Collaboration
+
+## Collaboration [/collaboration{?agentId,networkId}]
+
+### Collaboration - Get All Collaborations By Agent in Network [GET]
++ Parameters
+    + agentId (number, required)
+
+    + networkId (number, required)
+
+
+
+## Collaboration 1 [/collaboration/1]
+
+### Collaboration - Delete Specific Collaboration [DELETE]
+
+### Collaboration - Get Specific Collaboration [GET]
+
+
+## Collaboration [/collaboration{?name,creator,description,tokenName,tokenSymbol,tokenTotal,protocol,networkId,handles,contributors,comment}]
+
+### Collaboration - Create Collaboration [POST]
++ Parameters
+    + name (string, required)
+
+    + creator (number, required)
+
+    + description (string, required)
+
+    + tokenName (string, required)
+
+    + tokenSymbol (string, required)
+
+    + tokenTotal (number, required)
+
+    + protocol (string, required)
+
+    + networkId (number, required)
+
+    + handles (string, required)
+
+    + contributors (string, required)
+
+    + comment (string, required)
+
+
+
+## Collaboration [/collaboration{?networkId}]
+
+### Collaboration - Get All Collaborations for Network [GET]
++ Parameters
+    + networkId (number, required)
+
+
+
+## Collaboration [/collaboration{?networkId}]
+
+### Collaboration - Get All Collaborations [GET]
+
+### Collaboration - Delete All Collaborations for Network [DELETE]
++ Parameters
+    + networkId (number, required)
+
+
+
+
+# Agent [/agent{?name}]
+
+## Agent - Get All Agents [GET]
+
+## Agent - Create Agent [POST]
++ Parameters
+    + name (string, required)
+
+
+
+# Contribution [/contribution{?key,contains}]
+
+## Contribution - Get Contributions by Description [GET]
++ Parameters
+    + key (string, required)
+
+    + contains (string, required)
+
+
+
+# Agent 1 [/agent/1{?handleType,handleName}]
+
+## Agent - Register a Handle for Agent [POST]
++ Parameters
+    + handleType (string, required)
+
+    + handleName (string, required)
+
+
+
+# Agent [/agent{?name,handleType,handleName}]
+
+## Create Agent Handle [POST]
++ Parameters
+    + name (string, required)
+
+    + handleType (string, required)
+
+    + handleName (string, required)
+
+
+
+# Data Structures
+
+## Contribution - Create a MilestoneRequest (object)
+
+
+### Properties
++ `content` (Content, required) 
+
+
+## Content (object)
+
+
+### Properties
++ `title` (string, required) 
++ `description` (string, required) 
++ `milestoneOrigin` (number, required) 
++ `milestoneContributions` (array[number], required) 
+
+
+## Contribution - Create ContributionRequest (object)
+
+
+### Properties
++ `content` (Content3, required) 
+
+
+## Content3 (object)
+
+
+### Properties
++ `title` (string, required) 
++ `description` (string, required) 
++ `links` (array[string], required) 
 
