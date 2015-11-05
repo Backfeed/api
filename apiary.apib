@@ -4,82 +4,169 @@ HOST: {{baseURL}}
 # Backfeed API
 General purpose API
 
-# Group Handle
+# Group Creators
 
-## Handle [/handle{?handleType,handleName}]
+## Creators Id Collaborations [/creators/:id/collaborations{?fields}]
 
-### Delete all Handles [DELETE]
-
-### Create Handle [POST]
+### Get all Collaborations of Creator  [GET]
+Returns id, and the data fields specified in "fields" for all collaborations created by the agent ID.
 + Parameters
-    + handleType (string, required)
-
-    + handleName (string, required)
+    + fields (string, required)
 
 
 
-## Handle 1 [/handle/1]
+## Creators Id Contributions [/creators/:id/contributions{?fields}]
 
-### Delete Specific Handle [DELETE]
-
-### Get Specific Handle [GET]
-
-
-## Handle [/handle]
-
-### Get All Handles [GET]
-
-
-
-# Group Contribution
-
-## Contribution [/contribution{?collaborationId,agentId,type,comment}]
-
-### Create a Milestone [POST]
+### Get all Contributions of Creator  [GET]
+Returns id, and the data fields specified in "fields" for all contributions created by the agent ID.
 + Parameters
-    + collaborationId (number, required)
+    + fields (string, required)
 
-    + agentId (number, required)
 
-    + type (string, required)
 
-    + comment (string, required)
+## Creators Id Evaluations [/creators/:id/evaluations{?fields}]
 
+### Get all Evaluations of Creator [GET]
+Returns id, and the data fields specified in "fields" for all evaluations created by the agent ID.
++ Parameters
+    + fields (string, required)
+
+
+
+## Creators Id Networks [/creators/:id/networks]
+
+### Get all Networks of Creator  [GET]
+Returns data on all networks created by the agent ID.
+
+
+
+# Networks [/networks]
+
+## Create Network [POST]
 
 + Request (application/json)
-    + Attributes (Create a MilestoneRequest)
+    + Attributes (Create NetworkRequest)
+
+## Get All Networks [GET]
 
 
-## Contribution [/contribution{?collaborationId,agentId,type,comment}]
+# Group Collaborations
+
+## Collaborations Id Handles [/collaborations/:id/handles]
+
+### Register Collaboration Handle ?? PUT ?? DO WE NEED THIS [POST]
+Adds a handle to a collaboration.
+
+### Delete Collaboration Handle ?? PUT ?? [DELETE]
+Deletes a handle from a collaboration.
+
+
+## Collaborations Id Stakeholders [/collaborations/:id/stakeholders{?fields}]
+
+### Get All Stakeholders of a Collaboration [GET]
+returns all agents holding the tokens of the collaboration identified by the id.
++ Parameters
+    + fields (string, required)
+
+
+
+## Collaborations Id Creators [/collaborations/:id/creators{?fields}]
+
+### Get Collaboration Creator [GET]
+Returns id, name and the data fields specified in "fields" for the agent who created the collaboration.
++ Parameters
+    + fields (string, required)
+
+
+
+## Collaborations Id Contributions [/collaborations/:id/contributions{?fields}]
+
+### Get Contributions by Collaboration [GET]
+content sub fields vary with contribution type.
+
+
+
+fields define the fields to be included in the response. if ommited all fields are returned.
++ Parameters
+    + fields (string, required)
+
+
+
+## Collaborations Id Contributors [/collaborations/:id/contributors{?fields}]
+
+### Get All Contributors of a Collaboration [GET]
+Duplicate of get all agents in collaboration (reputation)
++ Parameters
+    + fields (string, required)
+
+
+
+## Collaborations Id [/collaborations/:id{?fields}]
+
+### Get Collaboration [GET]
+the response data fields can be chosen by the fields parameter. if ommited all fields are returned.
++ Parameters
+    + fields (string, required)
+
+
+
+## Collaborations Id Creators [/collaborations/:id/creators{?fields}]
+
+### Get Network Creator [GET]
+Returns id, name and the data fields specified in "fields" for the agent who created the network.
++ Parameters
+    + fields (string, required)
+
+
+
+## Collaborations Id Agents [/collaborations/:id/agents{?fields}]
+
+### Get All Agents in Collaboration (reputation) [GET]
+returns all agents who have reputation in the collaboration specified by the collaborationId.
+
+
+
+the response data fields can be chosen by the fields parameter. if ommited all fields are returned.
++ Parameters
+    + fields (string, required)
+
+
+
+
+# Group Contributions
+
+## Contributions [/contributions{?key,contains}]
 
 ### Create Contribution [POST]
-+ Parameters
-    + collaborationId (number, required)
+Contribution content fields vary with contribution type.
 
-    + agentId (number, required)
 
-    + type (string, required)
 
-    + comment (string, required)
+i.e. for contributionType: 'milestone' the content field will include:
 
+contributions: IDs of all contributions packed into the milestone.
+
+submitter: collaborationId of the submitting collaboration.
+
+name: contribution name
+
+description: contribution description
+
+links: links attached to the contribution
+
+
+
+In collaboration.protocols requiring contribution anti-spam fee, the response body will include new token balances for all contributors.
 
 + Request (application/json)
     + Attributes (Create ContributionRequest)
 
-
-## Contribution [/contribution{?collaborationId}]
-
-### Get All Contributions [GET]
-
-### Get Contributions by Collaboration [GET]
-+ Parameters
-    + collaborationId (number, required)
+### Get Contributions by Search [GET]
+key value is the content subfield to search.
 
 
 
-## Contribution [/contribution{?key,contains}]
-
-### Get Contributions by Title [GET]
+i.e. key=title&contains=new will return all contributions in whice 'new' appears somewhere in the field 'content.title'
 + Parameters
     + key (string, required)
 
@@ -87,257 +174,443 @@ General purpose API
 
 
 
-## Contribution 1 [/contribution/1]
+## Contributions Id Evaluators [/contributions/:id/evaluators]
 
-### Get Specific Contribution [GET]
+### Get All Evaluators of Contribution [GET]
+
+
+## Contributions Id [/contributions/:id{?fields}]
+
+### Get Contribution [GET]
+content sub fields vary with contribution type.
 
 
 
-# Group Network
-
-## Network [/network{?description,name,creator,protocol,agents,collaborations}]
-
-### Create Network [POST]
+fields define the fields to be included in the response. if ommited all fields are returned.
 + Parameters
-    + description (string, required)
-
-    + name (string, required)
-
-    + creator (number, required)
-
-    + protocol (string, required)
-
-    + agents (string, required)
-
-    + collaborations (string, required)
+    + fields (string, required)
 
 
 
-## Network [/network]
+## Contributions Id Evaluations [/contributions/:id/evaluations{?fields}]
 
-### Get All Networks [GET]
-
-
-## Network 1 [/network/1]
-
-### Get Specific Network [GET]
-
-
-
-# Group Agent
-
-## Agent UpdateHandle 1 [/agent/updateHandle/1{?handleType,handleName}]
-
-### Update Agent Handle [PUT]
+### Get Evaluations for a Contribution [GET]
+returns all the evaluation for a specific contribution identified by the ID.
 + Parameters
-    + handleType (string, required)
-
-    + handleName (string, required)
+    + fields (string, required)
 
 
 
-## Agent 1 [/agent/1]
+## Contributions Id Creators [/contributions/:id/creators{?fields}]
 
-### Get Specific Agent [GET]
-
-
-## Agent UpdateNetwork 1 [/agent/updateNetwork/1{?networkId}]
-
-### Update Agent Network [PUT]
+### Get Contribution Creators [GET]
+Returns id, name and the data fields specified in "fields" for the agents who created the contribution.
 + Parameters
-    + networkId (number, required)
+    + fields (string, required)
 
 
 
-## Agent FindByHandle [/agent/findByHandle{?handleType,handleName}]
+
+# Evaluations Id [/evaluations/:id{?fields}]
+
+## Get Evaluation [GET]
+returns the data on a specific evaluation identified by the ID.
++ Parameters
+    + fields (string, required)
+
+
+
+# Group Agents
+
+## Agents Id Collaborations [/agents/:id/collaborations{?networkId,fields}]
+
+### Get Collaborations by Agent [GET]
+if networkId is specified will return collaborations only from the specific network.
+
+
+
+the response data fields can be chosen by the fields parameter. if ommited all fields are returned.
++ Parameters
+    + networkId (string, required)
+
+    + fields (string, required)
+
+
+
+## Agents Id [/agents/:id{?fields}]
+
+### Get Agent [GET]
+the response data fields can be chosen by the fields parameter. if ommited all fields are returned.
++ Parameters
+    + fields (string, required)
+
+
+
+## Agents Id Contributions [/agents/:id/contributions{?collaborationId,fields}]
+
+### Get Contributions by Agent [GET]
+returns all contributions made by an agent.
+
+
+
+if collaborationID is specified, returns only contribution to that specific collaboration.
++ Parameters
+    + collaborationId (number, required)
+
+    + fields (string, required)
+
+
+
+## Agents [/agents{?handleType,handleName,fields}]
 
 ### Get Agent by Handle [GET]
+[[Neeraj: To be considered. might be removed. ADD APPNAME to find the unique agent]]
+
+
+
+the response data fields can be chosen by the fields parameter. if ommited all fields are returned.
 + Parameters
     + handleType (string, required)
 
     + handleName (string, required)
 
-
-
-## Agent AllByNetwork [/agent/allByNetwork{?networkId}]
-
-### Get All Agents in Network [GET]
-+ Parameters
-    + networkId (number, required)
+    + fields (string, required)
 
 
 
-## Agent AllInCollaboration [/agent/allInCollaboration{?collaborationId}]
+## Agents [/agents{?name}]
 
-### Get All Agents in Collaboration [GET]
-+ Parameters
-    + collaborationId (number, required)
+### Create Agent [POST]
+Assigns a unique id to a given name.
 
-
-
-
-# Group Evaluation
-
-## Evaluation 1 [/evaluation/1]
-
-### Get Specific Evaluation [GET]
-
-
-## Evaluation [/evaluation{?agentId,tokens,contributionId,stake}]
-
-### Create Evaluation [POST]
-+ Parameters
-    + agentId (number, required)
-
-    + tokens (number, required)
-
-    + contributionId (number, required)
-
-    + stake (number, required)
+names need not be unique.
 
 
 
-## Evaluation [/evaluation{?contributionId}]
-
-### Get All Evaluations for a Contribution [GET]
-+ Parameters
-    + contributionId (number, required)
-
-
-
-
-# Group Collaboration
-
-## Collaboration [/collaboration{?agentId,networkId}]
-
-### Get All Collaborations By Agent in Network [GET]
-+ Parameters
-    + agentId (number, required)
-
-    + networkId (number, required)
-
-
-
-## Collaboration [/collaboration{?name,creator,description,tokenName,tokenSymbol,tokenTotal,protocol,networkId,handles,contributors,comment}]
-
-### Create Collaboration [POST]
-+ Parameters
-    + name (string, required)
-
-    + creator (number, required)
-
-    + description (string, required)
-
-    + tokenName (string, required)
-
-    + tokenSymbol (string, required)
-
-    + tokenTotal (number, required)
-
-    + protocol (string, required)
-
-    + networkId (number, required)
-
-    + handles (string, required)
-
-    + contributors (string, required)
-
-    + comment (string, required)
-
-
-
-## Collaboration [/collaboration{?networkId}]
-
-### Get All Collaborations for Network [GET]
-+ Parameters
-    + networkId (number, required)
-
-
-
-## Collaboration 1 [/collaboration/1]
-
-### Get Specific Collaboration [GET]
-
-
-## Collaboration [/collaboration]
-
-### Get All Collaborations [GET]
-
-
-
-# Agent [/agent{?name}]
-
-## Get All Agents [GET]
-
-## Create Agent [POST]
+handles can be assigned in agent creation by specifing them in the body
 + Parameters
     + name (string, required)
 
 
++ Request (application/json)
+    + Attributes (Create AgentRequest)
 
-# Contribution [/contribution{?key,contains}]
 
-## Get Contributions By Description query [GET]
+
+# Networks Id Agents [/networks/:id/agents{?fields}]
+
+## Get All Agents in Network [GET]
+Customizable call for data on all agents in a network.
+
+if fields parameter is null - reponse includes all fields.
+
+if fields include "collaboration" with no subfields specified - response includes all subfields.
+
+same for networks or handles fields.
 + Parameters
-    + key (string, required)
-
-    + contains (string, required)
+    + fields (string, required)
 
 
 
-# Agent 1 [/agent/1{?handleType,handleName}]
+# Contributions Id [/contributions/:id]
 
-## Register a Handle for Agent [POST]
+## Update Contribution [PUT]
+used to update fields of an existing contribution.
+
+
+
+[[ neeraj - should only be allowed under contribution status "pending", added updator field to content]]
+
+
+# Collaborations [/collaborations]
+
+## Create Collaboration [POST]
+Creates a collaboration.
+
+
+
+protocol field in the body can be either null or hold at least collaborationProtocol.type.
+
+collaborationProtocol.parameters can have any subfield and will be interperted depending on the collaborationProtocol.type.
+
+
+
+handles, contributors and comment fields are optional.
+
+
+
+When contributors field is empty the founding contribution is regarde as being contributed by the creator owning 100%
+
++ Request (application/json)
+    + Attributes (Create CollaborationRequest)
+
+
+# Networks Id [/networks/:id]
+
+## Register Agent to Network [PUT]
+This call marks the agent as a member of the network.
+
++ Request (application/json)
+    + Attributes (Register Agent to NetworkRequest)
+
+## Remove Agent from Network [PUT]
+This call removes the agent from network.
+
+
+
+In some networks this may not allow the agent to submit further contributions.
+
+In any case the agent keeps her tokens and reputation, and so she can continue evaluating contributions.
+
++ Request (application/json)
+    + Attributes (Remove Agent from NetworkRequest)
+
+
+# Group Networks
+
+## Networks Id Contributors [/networks/:id/contributors{?fields}]
+
+### Get All Contributors of a Network [GET]
+returns all agents holding any type of reputation within a network
 + Parameters
-    + handleType (string, required)
-
-    + handleName (string, required)
+    + fields (string, required)
 
 
 
-# Agent [/agent{?name,handleType,handleName}]
+## Network Id Collaborations [/network/:id/collaborations{?fields}]
 
-## Create Agent Handle [POST]
+### Get Collaborations by Network [GET]
+Returns data about all collaborations in a network.
+
+
+
+the response data fields can be chosen by the fields parameter. if ommited all fields are returned.
 + Parameters
-    + name (string, required)
+    + fields (string, required)
 
-    + handleType (string, required)
 
-    + handleName (string, required)
+
+## Networks Id Evaluators [/networks/:id/evaluators]
+
+### Get All Evaluators of Network [GET]
+
+
+## Networks Id [/networks/:id{?fields}]
+
+### Get Network [GET]
++ Parameters
+    + fields (string, required)
+
+
+
+## Networks Id Stakeholders [/networks/:id/stakeholders{?fields}]
+
+### Get Stakeholders of a Network [GET]
+returns all agents holding any type of tokens within a network
++ Parameters
+    + fields (string, required)
+
+
+
+
+# Group Evaluations
+
+## Evaluations Id Creators [/evaluations/:id/creators{?fields}]
+
+### Get Evaluation Creator [GET]
+Returns id, name and the data fields specified in "fields" for the agent who created the evaluation.
++ Parameters
+    + fields (string, required)
+
+
+
+
+# Agents Id [/agents/:id]
+
+## Register Agent Handle [PUT]
+Adds a handle to a specific agent.
+
+handles (type and name combination) must be unique across all users.
+
+
+
+handles are specified in the body
+
++ Request (application/json)
+    + Attributes (Register Agent HandleRequest)
+
+## Delete Agent Handles [PUT]
+deletes all specified handles (type and name combination) from an agent.
+
++ Request (application/json)
+    + Attributes (Delete Agent HandlesRequest)
+
+
+# Evaluations [/evaluations]
+
+## Create Evaluation [POST]
+Evaluates the contribution identified by the ID.
+
+
+
+Content of body may change according to the collaboration protocol used by the contribution being evaluated.
+
++ Request (application/json)
+    + Attributes (Create EvaluationRequest)
+
+
+# Group Evaluators
+
+## Evaluators Id Contributions [/evaluators/:id/contributions{?network}]
+
+### Get Contributions of Evaluator [GET]
+returns all contributions evaluated by an agent identified by the id in a specific network.
++ Parameters
+    + network (number, required)
+
 
 
 
 # Data Structures
 
-## Create a MilestoneRequest (object)
+## Create NetworkRequest (object)
 
 
 ### Properties
-+ `content` (Content, required) 
-
-
-## Content (object)
-
-
-### Properties
-+ `title` (string, required) 
++ `creator` (number, required) 
++ `name` (string, required) 
 + `description` (string, required) 
-+ `milestoneOrigin` (number, required) 
-+ `milestoneContributions` (array[number], required) 
++ `networkProtocol` (NetworkProtocol, required) 
++ `agents` (array[number], required) 
+
+
+## NetworkProtocol (object)
+
+
+### Properties
++ `allowNewAgent` (string, required) 
 
 
 ## Create ContributionRequest (object)
 
 
 ### Properties
-+ `content` (Content3, required) 
++ `creator` (number, required) 
++ `collaboration` (number, required) 
++ `type` (string, required) 
++ `contributors` (array[Contributor], required) 
++ `content` (Content, required) 
++ `comment` (string, required) 
 
 
-## Content3 (object)
+## Contributor (object)
 
 
 ### Properties
-+ `title` (string, required) 
++ `id` (number, required) 
++ `ownership` (number, required) 
+
+
+## Content (object)
+
+
+### Properties
++ `name` (string, required) 
 + `description` (string, required) 
-+ `links` (array[string], required) 
++ `links` (string, required) 
+
+
+## Create CollaborationRequest (object)
+
+
+### Properties
++ `creator` (number, required) 
++ `name` (string, required) 
++ `description` (string, required) 
++ `network` (number, required) 
++ `token` (Token, required) 
++ `collaborationProtocol` (CollaborationProtocol, required) 
++ `contributors` (array[Contributor], required) 
++ `handles` (array[Handle], required) 
++ `comment` (string, required) 
+
+
+## Token (object)
+
+
+### Properties
++ `name` (string, required) 
++ `symbol` (string, required) 
++ `total` (number, required) 
+
+
+## CollaborationProtocol (object)
+
+
+### Properties
++ `type` (string, required) 
++ `parameters` (Parameters, required) 
+
+
+## Parameters (object)
+
+
+### Properties
++ `similarity` (string, required) 
++ `reputationFlowSpeed` (string, required) 
++ `milestoneSubmitter` (string, required) 
+
+
+## Handle (object)
+
+
+### Properties
++ `name` (string, required) 
++ `type` (string, required) 
+
+
+## Register Agent to NetworkRequest (object)
+
+
+### Properties
++ `agentId` (number, required) 
+
+
+## Remove Agent from NetworkRequest (object)
+
+
+### Properties
++ `agentId` (number, required) 
+
+
+## Create AgentRequest (object)
+
+
+### Properties
++ `handles` (array[Handle], required) 
+
+
+## Register Agent HandleRequest (object)
+
+
+### Properties
++ `handles` (array[Handle], required) 
+
+
+## Create EvaluationRequest (object)
+
+
+### Properties
++ `creator` (number, required) 
++ `contributionId` (number, required) 
++ `evaluation` (number, required) 
++ `stake` (number, required) 
++ `comment` (string, required) 
+
+
+## Delete Agent HandlesRequest (object)
+
+
+### Properties
++ `handles` (array[Handle], required) 
 
